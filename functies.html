@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eenvoudige Rekenmachine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 280px;
+        }
+        input, select, button {
+            margin: 8px 0;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            width: 90%;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Eenvoudige Rekenmachine</h2>
+
+    <input type="number" id="num1" step="any" placeholder="Eerste getal" required><br>
+    <select id="operation">
+        <option value="+">+</option>
+        <option value="-">−</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select><br>
+    <input type="number" id="num2" step="any" placeholder="Tweede getal" required><br>
+    <button onclick="bereken()">Bereken</button>
+
+    <div class="result" id="resultaat"></div>
+</div>
+
+<script>
+function bereken() {
+    const num1 = parseFloat(document.getElementById("num1").value);
+    const num2 = parseFloat(document.getElementById("num2").value);
+    const op = document.getElementById("operation").value;
+    let resultaat;
+
+    if (isNaN(num1) || isNaN(num2)) {
+        resultaat = "Voer beide getallen in!";
+    } else {
+        switch (op) {
+            case '+':
+                resultaat = num1 + num2;
+                break;
+            case '-':
+                resultaat = num1 - num2;
+                break;
+            case '*':
+                resultaat = num1 * num2;
+                break;
+            case '/':
+                resultaat = num2 !== 0 ? num1 / num2 : "Fout: delen door nul!";
+                break;
+            default:
+                resultaat = "Ongeldige bewerking!";
+        }
+    }
+
+    document.getElementById("resultaat").textContent = "Resultaat: " + resultaat;
+}
+</script>
+
+</body>
+</html>
