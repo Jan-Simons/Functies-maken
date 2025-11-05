@@ -63,37 +63,42 @@
     <div class="result" id="resultaat"></div>
 </div>
 
-<script>
-function bereken() {
-    const num1 = parseFloat(document.getElementById("num1").value);
-    const num2 = parseFloat(document.getElementById("num2").value);
-    const op = document.getElementById("operation").value;
-    let resultaat;
-
-    if (isNaN(num1) || isNaN(num2)) {
-        resultaat = "Voer beide getallen in!";
-    } else {
-        switch (op) {
-            case '+':
-                resultaat = num1 + num2;
-                break;
-            case '-':
-                resultaat = num1 - num2;
-                break;
-            case '*':
-                resultaat = num1 * num2;
-                break;
-            case '/':
-                resultaat = num2 !== 0 ? num1 / num2 : "Fout: delen door nul!";
-                break;
-            default:
-                resultaat = "Ongeldige bewerking!";
+ <script>
+        // Function to input 
+        function getInputValues() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const op = document.getElementById("operation").value;
+            return { num1, num2, op };
         }
-    }
 
-    document.getElementById("resultaat").textContent = "Resultaat: " + resultaat;
-}
-</script>
+        //  Function for calculation
+        function rekenUit(num1, num2, op) {
+            if (isNaN(num1) || isNaN(num2)) {
+                return "Voer beide getallen in!";
+            }
+
+            switch (op) {
+                case '+': return num1 + num2;
+                case '-': return num1 - num2;
+                case '*': return num1 * num2;
+                case '/': return num2 !== 0 ? num1 / num2 : "Fout: delen door nul!";
+                default: return "Ongeldige bewerking!";
+            }
+        }
+
+        // function to show result 
+        function toonResultaat(tekst) {
+            document.getElementById("resultaat").textContent = "Resultaat: " + tekst;
+        }
+
+        //  mainfunction that combines everything
+        function bereken() {
+            const { num1, num2, op } = getInputValues();
+            const resultaat = rekenUit(num1, num2, op);
+            toonResultaat(resultaat);
+        }
+    </script>
 
 </body>
 </html>
